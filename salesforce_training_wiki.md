@@ -1,5 +1,5 @@
 # Salesforce 어드민 교육 위키
-**대유넥스티어 | 2026.04.21 ~ 05.06 | 강사: 장혜성 외**
+**대유넥스티어 | 2026.04.21 ~ 05.06
 
 ---
 
@@ -614,8 +614,8 @@ Prior Value of {Record.Id} is NOT Null → 레코드 업데이트
 **핵심**: 삭제 전(Before-Delete)에 계산해야 함. 삭제 후에는 레코드가 없어 계산 불가.
 
 ```
-Before-Delete 트리거
-→ Get Records (같은 Order의 형제 Items, 삭제 대상 제외)
+Before-Delete 트리거(개체: OrderItem)
+→ Get Records (같은 Order의 형제 Items을 불러오되 삭제 대상 제외)
    조건 1: Order__c = $Record.Order__c
    조건 2: Id ≠ $Record.Id  ← 이 조건 필수!
 → Loop + Assignment 합계 계산
@@ -1099,18 +1099,18 @@ Salesforce 멀티테넌트 환경 보호를 위한 강제 한도.
 
 ### Flow 개발 체크리스트
 
-- [ ] ID 하드코딩 금지 (DeveloperName으로 비교)
-- [ ] Loop 안에 핑크색 Element 없음
+- [ ] ID 하드코딩 금지(Sandbox -> Production 바뀔 때 ID는 변경됨)
+- [ ] Loop 안에 핑크색 Element 없음(DML X)
 - [ ] Before-Save → Assignment 사용 (Update Records 지양)
 - [ ] After-Save → Update Records 반드시 포함
-- [ ] Collection 변수 타입 확인 (숫자 합산은 단수 Currency 변수)
+- [ ] Collection 변수 타입 확인 (금액 합산은 단수 Currency 변수, 그렇지 않으면 ,(콤마)로 쌓임)
 - [ ] ISBLANK 사용 (ISNULL보다 안전)
-- [ ] Label과 Description 명확하게 작성
+- [ ] Label과 Description 명확하게 작성(팀원과 공유하므로)
 - [ ] Flow Trigger Explorer로 동일 오브젝트 Flow 실행 순서 확인
 - [ ] 서브플로우 반드시 활성화 후 메인에서 호출
 - [ ] Compact Layout 설정 (Flow 디버그 필수)
-- [ ] Custom App으로 개발 (Standard App 직접 수정 금지)
+- [ ] Custom App으로 개발 (Standard App 직접 수정 금지, Standard App(Sales, Service 등 Salesforce 기본 제공 앱)은 CustomApplication 메타데이터 타입으로 추출이 안되기 때문에 Change Set에 담을 수 없음.)
 
 ---
 
-*대유넥스티어 어드민 교육 | 2026.04.21 ~ 05.06 | Salesforce 공식 문서(Spring '26) 기반 검증 완료*
+*대유넥스티어 어드민 교육 | 2026.04.21 ~ 05.11 | Salesforce 공식 문서(Spring '26) 기반 검증 완료*
